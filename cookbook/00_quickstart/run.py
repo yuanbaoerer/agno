@@ -37,7 +37,7 @@ Learn More
 """
 
 from pathlib import Path
-
+import os
 from agent_search_over_knowledge import agent_with_knowledge
 from agent_with_guardrails import agent_with_guardrails
 from agent_with_memory import agent_with_memory
@@ -51,6 +51,9 @@ from custom_tool_for_self_learning import self_learning_agent
 from human_in_the_loop import human_in_the_loop_agent
 from multi_agent_team import multi_agent_team
 from sequential_workflow import sequential_workflow
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # ---------------------------------------------------------------------------
 # AgentOS Config

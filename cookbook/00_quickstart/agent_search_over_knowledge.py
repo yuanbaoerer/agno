@@ -14,14 +14,19 @@ Example prompts to try:
 - "What is the AgentOS?"
 """
 
+
+import os
+from dotenv import load_dotenv
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
 from agno.knowledge.embedder.google import GeminiEmbedder
 from agno.knowledge.knowledge import Knowledge
-from agno.models.google import Gemini
 from agno.vectordb.chroma import ChromaDb
 from agno.vectordb.search import SearchType
+from agno.models.dashscope import DashScope
 
+
+load_dotenv()
 # ---------------------------------------------------------------------------
 # Setup
 # ---------------------------------------------------------------------------
@@ -82,7 +87,11 @@ You are an expert on the Agno framework and building AI agents.
 # ---------------------------------------------------------------------------
 agent_with_knowledge = Agent(
     name="Agent with Knowledge",
-    model=Gemini(id="gemini-3-flash-preview"),
+    model=DashScope(
+        id=os.getenv("DASHSCOPE_MODEL_ID", "glm-5"),
+        api_key=os.getenv("DASHSCOPE_API_KEY"),
+        base_url=os.getenv("DASHSCOPE_BASE_URL"),
+    ),
     instructions=instructions,
     knowledge=knowledge,
     search_knowledge=True,

@@ -16,8 +16,13 @@ Example prompts to try:
 """
 
 from agno.agent import Agent
-from agno.models.google import Gemini
+from agno.models.dashscope import DashScope
 from agno.tools.yfinance import YFinanceTools
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # ---------------------------------------------------------------------------
 # Agent Instructions
@@ -59,7 +64,11 @@ computes key ratios, and produces concise, decision-ready insights.
 # ---------------------------------------------------------------------------
 agent_with_tools = Agent(
     name="Agent with Tools",
-    model=Gemini(id="gemini-3-flash-preview"),
+    model=DashScope(
+        id=os.getenv("DASHSCOPE_MODEL_ID", "glm-5"),
+        api_key=os.getenv("DASHSCOPE_API_KEY"),
+        base_url=os.getenv("DASHSCOPE_BASE_URL"),
+    ),
     instructions=instructions,
     tools=[YFinanceTools(all=True)],
     add_datetime_to_context=True,

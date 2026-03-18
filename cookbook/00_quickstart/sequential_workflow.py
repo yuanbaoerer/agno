@@ -18,12 +18,16 @@ Example prompts to try:
 - "Give me a report on Apple"
 """
 
+import os
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
 from agno.models.google import Gemini
 from agno.tools.yfinance import YFinanceTools
 from agno.workflow import Step, Workflow
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # ---------------------------------------------------------------------------
 # Storage Configuration
 # ---------------------------------------------------------------------------
@@ -138,7 +142,7 @@ sequential_workflow = Workflow(
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     sequential_workflow.print_response(
-        "Analyze NVIDIA (NVDA) for investment",
+        "对英伟达（NVDA）进行投资分析",
         stream=True,
     )
 
