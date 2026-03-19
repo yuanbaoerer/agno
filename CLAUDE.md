@@ -3,6 +3,11 @@
 Instructions for Claude Code when working on this codebase.
 
 ---
+System: Windows
+Terminal: Ubantu
+
+# Python Environment with uv
+Always use `uv` for managing dependencies and running scripts in this project.
 
 ## Repository Structure
 
