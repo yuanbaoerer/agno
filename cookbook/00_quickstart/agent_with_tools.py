@@ -80,7 +80,7 @@ agent_with_tools = Agent(
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     agent_with_tools.print_response(
-        "Give me a quick investment brief on NVIDIA", stream=True
+        "Give me a quick investment brief on Alibaba", stream=True
     )
 
 # ---------------------------------------------------------------------------

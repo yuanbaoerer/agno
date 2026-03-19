@@ -21,7 +21,7 @@ Example prompts to try:
 import os
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.google import Gemini
+from agno.models.dashscope import DashScope
 from agno.tools.yfinance import YFinanceTools
 from agno.workflow import Step, Workflow
 from dotenv import load_dotenv
@@ -38,7 +38,11 @@ workflow_db = SqliteDb(db_file="tmp/agents.db")
 # ---------------------------------------------------------------------------
 data_agent = Agent(
     name="Data Gatherer",
-    model=Gemini(id="gemini-3-flash-preview"),
+    model=DashScope(
+        id=os.getenv("DASHSCOPE_MODEL_ID", "glm-5"),
+        api_key=os.getenv("DASHSCOPE_API_KEY"),
+        base_url=os.getenv("DASHSCOPE_BASE_URL"),
+    ),
     tools=[YFinanceTools(all=True)],
     instructions="""\
 You are a data gathering agent. Your job is to fetch comprehensive market data.
@@ -69,7 +73,11 @@ data_step = Step(
 # ---------------------------------------------------------------------------
 analyst_agent = Agent(
     name="Analyst",
-    model=Gemini(id="gemini-3-flash-preview"),
+    model=DashScope(
+        id=os.getenv("DASHSCOPE_MODEL_ID", "glm-5"),
+        api_key=os.getenv("DASHSCOPE_API_KEY"),
+        base_url=os.getenv("DASHSCOPE_BASE_URL"),
+    ),
     instructions="""\
 You are a financial analyst. You receive raw market data from the data team.
 
@@ -98,7 +106,11 @@ analysis_step = Step(
 # ---------------------------------------------------------------------------
 report_agent = Agent(
     name="Report Writer",
-    model=Gemini(id="gemini-3-flash-preview"),
+    model=DashScope(
+        id=os.getenv("DASHSCOPE_MODEL_ID", "glm-5"),
+        api_key=os.getenv("DASHSCOPE_API_KEY"),
+        base_url=os.getenv("DASHSCOPE_BASE_URL"),
+    ),
     instructions="""\
 You are a report writer. You receive analysis from the research team.
 
