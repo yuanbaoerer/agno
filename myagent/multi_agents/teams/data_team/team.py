@@ -1,5 +1,13 @@
 """Data Development Team - Route mode for data engineering tasks."""
 
+import sys
+from pathlib import Path
+
+# Support running directly: python teams/data_team/team.py
+if __name__ == "__main__" and __package__ is None:
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+
+from agno.team import TeamMode
 from agno.team.team import Team
 from multi_agents.config import model
 from multi_agents.agents.sql_expert import sql_expert
@@ -10,7 +18,7 @@ from multi_agents.agents.data_quality import data_quality
 data_team = Team(
     id="data-team",
     name="Data Development Team",
-    mode="route",
+    mode=TeamMode.route,
     model=model,
     members=[sql_expert, etl_engineer, data_modeler, data_quality],
     instructions=[
@@ -39,3 +47,7 @@ data_team = Team(
 )
 
 __all__ = ["data_team"]
+
+
+if __name__ == "__main__":
+    data_team.print_response("帮我设计一个订单事实表", stream=True)

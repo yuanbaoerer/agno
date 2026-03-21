@@ -5,7 +5,15 @@ Run the data development team with example queries.
 
 Usage:
     python -m multi_agents.run
+    Or directly: python run.py
 """
+
+import sys
+from pathlib import Path
+
+# Support running directly: python run.py
+if __name__ == "__main__" and __package__ is None:
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from multi_agents.teams.data_team import data_team
 

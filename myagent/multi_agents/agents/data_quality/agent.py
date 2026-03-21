@@ -1,5 +1,12 @@
 """Data Quality Agent - Data validation and monitoring."""
 
+import sys
+from pathlib import Path
+
+# Support running directly: python agents/data_quality/agent.py
+if __name__ == "__main__" and __package__ is None:
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+
 from agno.agent.agent import Agent
 from multi_agents.config import model, get_db_tools
 
